@@ -11,9 +11,13 @@
 |
 */
 
-$router->post('auth/login', ['uses' => 'AuthController@authenticate']);
+$router->post('login', ['uses' => 'AuthController@authenticate']);
 
-$router->group(['middleware' => ['jwt.auth', 'admin.auth']], function() use ($router) {
-    $router->get('users', 'TesteController@index');
-    $router->get('teste', 'TesteController@index');
-});
+// $router->group(['middleware' => ['jwt.auth', 'admin.auth']], function() use ($router) {
+// });
+
+$router->get('users', 'UserController@index');
+$router->get('users/{id}', 'UserController@show');
+$router->post('users', 'UserController@store');
+$router->put('users/{id}', 'UserController@update');
+$router->delete('users/{id}', 'UserController@destroy');
